@@ -1,24 +1,57 @@
 #include "Calculator.h"
 #include <iostream>
 
-double Calculator::Calculate(double firstNum, char mathOper, double secondNum)
+double Calculator::Calculate(double firstNum, char mathOper, double secondNum, char mathOper2, double thirdNum)
 {
-	switch (mathOper) {
+	double sum = firstNum + secondNum;
+	double minusSum = firstNum - secondNum;
+	double divideSum = firstNum / secondNum;
+	double multipleSum = firstNum * secondNum;
+
+	if (secondNum == 0 || thirdNum == 0) {
+		std::cout << "Деление на 0 запрещено";
+	}
+	else {
+
+	switch (mathOper2) {
 	case '+':
-		return firstNum + secondNum;
+		return sum + thirdNum;
+		break;
 	case '-':
-		return firstNum - secondNum;
+		return minusSum - thirdNum;
+		break;
 	case '/':
 	case ':':
-		if (secondNum != 0) {
-			return firstNum / secondNum;
+		if (mathOper == '+') {
+			return firstNum + (secondNum / thirdNum);
 		}
-		else {
-			std::cout << "Деление на 0 запрещено";
+		else if (mathOper == '-') {
+			return firstNum - (secondNum / thirdNum);
 		}
+		else if (mathOper == '*') {
+			return (firstNum * secondNum) / thirdNum;
+		}
+		else if (mathOper == '/') {
+			return (firstNum / secondNum) / thirdNum;
+		}
+		break;
 	case '*':
-		return firstNum * secondNum;
+		if (mathOper == '+') {
+			return firstNum + (secondNum * thirdNum);
+		}
+		else if (mathOper == '-') {
+			return firstNum - (secondNum * thirdNum);
+		}
+		else if (mathOper == '*') {
+			return (firstNum * secondNum) * thirdNum;
+		}
+		else if (mathOper == '/') {
+			return (firstNum / secondNum) * thirdNum;
+		}
+		break;
 	default:
 		return 0;
+		break;
+	}
 	}
 }
